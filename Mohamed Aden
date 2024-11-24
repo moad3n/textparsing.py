@@ -1,6 +1,7 @@
 import re
 import matplotlib.pyplot as plt
 from collections import Counter
+
 # Sample text for parsing
 text = """
 Once on a time and twice on a time, and all times together as ever
@@ -17,15 +18,27 @@ You can connect with the author at rfederer@tennis.com and
 swilliams@tennis.com
 Admin contact number: 1-888-111-2222
 """
+
 # Step 1: Count words and characters using a list
-words_list = text.split()
+words_list = re.findall(r'\b\w+\b', text)  # Extract words using regex
 characters_list = list(text)
 word_count = len(words_list)
 char_count = len(characters_list)
 print(f"Word Count: {word_count}")
 print(f"Character Count (including spaces): {char_count}")
+
 # Step 2: Create a histogram of word frequency
 word_freq = Counter(words_list)
-plt.bar(word_freq.keys(), word_freq.values())
+
+# Limit to top 20 most common words for better visualization
+most_common_words = word_freq.most_common(20)
+words, frequencies = zip(*most_common_words)
+
+plt.bar(words, frequencies)
 plt.xticks(rotation=90)
 plt.xlabel('Words')
+plt.ylabel('Frequency')
+plt.title('Word Frequency Histogram')
+plt.tight_layout()
+plt.show()
+
