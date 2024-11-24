@@ -1,0 +1,31 @@
+import re
+import matplotlib.pyplot as plt
+from collections import Counter
+# Sample text for parsing
+text = """
+Once on a time and twice on a time, and all times together as ever
+I heard tell of,
+there was a tiny lassie who would weep all day to have the stars
+in the sky to play
+with; she wouldn’t have this, and she wouldn’t have that, but it
+was always the
+stars she would have...
+The story is written by
+Roger Federer &
+Serina Williams
+You can connect with the author at rfederer@tennis.com and
+swilliams@tennis.com
+Admin contact number: 1-888-111-2222
+"""
+# Step 1: Count words and characters using a list
+words_list = text.split()
+characters_list = list(text)
+word_count = len(words_list)
+char_count = len(characters_list)
+print(f"Word Count: {word_count}")
+print(f"Character Count (including spaces): {char_count}")
+# Step 2: Create a histogram of word frequency
+word_freq = Counter(words_list)
+plt.bar(word_freq.keys(), word_freq.values())
+plt.xticks(rotation=90)
+plt.xlabel('Words')
